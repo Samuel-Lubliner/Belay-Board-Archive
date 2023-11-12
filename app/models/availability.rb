@@ -22,6 +22,7 @@
 #
 class Availability < ApplicationRecord
   belongs_to :user
+  has_many :requests, dependent: :destroy
 
   validates :start_time, presence: true
   validates :end_time, presence: true

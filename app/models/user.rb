@@ -28,6 +28,9 @@ class User < ApplicationRecord
 
   has_many :availabilities, dependent: :destroy
 
+  has_many :sent_requests, class_name: 'Request', foreign_key: 'sender_id', dependent: :destroy
+  has_many :received_requests, through: :availabilities, source: :requests
+
   
   validates :username,
     presence: true,
