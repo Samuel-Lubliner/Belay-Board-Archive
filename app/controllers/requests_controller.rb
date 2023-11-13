@@ -22,6 +22,7 @@ class RequestsController < ApplicationController
   # POST /requests or /requests.json
   def create
     @request = Request.new(request_params)
+    @request.status = :pending
 
     respond_to do |format|
       if @request.save
