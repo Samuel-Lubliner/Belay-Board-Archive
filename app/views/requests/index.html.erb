@@ -1,14 +1,33 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Requests</h1>
-
-<div id="requests">
-  <% @requests.each do |request| %>
-    <%= render request %>
-    <p>
-      <%= link_to "Show this request", request %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New request", new_request_path %>
+<!-- app/views/requests/index.html.erb -->
+<h1>Requests on Availabilities</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Availability ID</th>
+      <th>Status</th>
+      <th>Requester</th>
+      <th>Location</th>
+      <th>Description</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @requests.each do |request| %>
+      <tr>
+        <td><%= request.availability.id %></td>
+        <td><%= request.status %></td>
+        <td><%= request.sender.username %></td>
+        <td><%= request.availability.location %></td>
+        <td><%= request.availability.description %></td>
+        <td>
+          <%= form_with(model: request, url: accept_availability_request_path(request.availability, request), method: :post, local: true) do |form| %>
+            <%= form.submit 'Accept' %>
+          <% end %>
+          <%= form_with(model: request, url: reject_availability_request_path(request.availability, request), method: :post, local: true) do |form| %>
+            <%= form.submit 'Reject' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

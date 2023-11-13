@@ -1,6 +1,18 @@
 class RequestsController < ApplicationController
   before_action :set_request, only: %i[ show edit update destroy ]
 
+  def accept
+    @request = Request.find(params[:id])
+    @request.accepted!
+    redirect_to availability_requests_path(@request.availability), notice: 'Request accepted.'
+  end
+
+  def reject
+    @request = Request.find(params[:id])
+    @request.rejected!
+    redirect_to availability_requests_path(@request.availability), notice: 'Request rejected.'
+  end
+
   # GET /requests or /requests.json
   def index
     @user = current_user
