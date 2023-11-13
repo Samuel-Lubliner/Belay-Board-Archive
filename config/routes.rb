@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  resources :requests
+  root "availabilities#index"
   resources :availabilities
+  resources :availabilities do
+    resources :requests, only: [:index]
+  end
+  resources :requests
   devise_for :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+
 end

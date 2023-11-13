@@ -3,7 +3,8 @@ class RequestsController < ApplicationController
 
   # GET /requests or /requests.json
   def index
-    @requests = Request.all
+    @user = current_user
+    @requests = Request.joins(:availability).where(availabilities: { user_id: @user.id })
   end
 
   # GET /requests/1 or /requests/1.json
