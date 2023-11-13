@@ -64,10 +64,25 @@ if Rails.env.development?
     
       puts "done adding availabilities..."
     end
-    
 
     task add_requests: :environment do
       puts "adding requests..."
+  
+      availabilities = Availability.all
+  
+      availabilities.each do |availability|
+        # Randomly select a user who will make the request
+        requester = User.all.sample
+  
+        # Create a request for the selected availability
+        availability.requests.create(
+          sender: requester,
+        )
+  
+        puts "Request created by #{requester.username} for availability ID #{availability.id}"
+      end
+  
+      puts "done adding requests..."
     end
   end
 end
