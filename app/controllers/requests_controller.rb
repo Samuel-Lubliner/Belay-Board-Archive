@@ -22,6 +22,7 @@ class RequestsController < ApplicationController
   # POST /requests or /requests.json
   def create
     @request = Request.new(request_params)
+    @request.sender_id = current_user.id
     @request.status = :pending
 
     respond_to do |format|
@@ -66,6 +67,6 @@ class RequestsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def request_params
-      params.require(:request).permit(:status, :availability_id, :sender_id)
+      params.require(:request).permit(:status, :availability_id)
     end
 end
