@@ -19,13 +19,19 @@
   </div>
 
   <div>
-    <%= form.label :availability_id, style: "display: block" %>
-    <%= form.text_field :availability_id %>
+    <p>
+      <strong>Availability ID:</strong>
+      <%= request.availability_id %>
+    </p>
+    <%= form.hidden_field :availability_id %>
   </div>
 
-  <div>
-    <strong>Sender:</strong>
-    <%= request.sender_id %>
+   <div>
+    <p>
+      <strong>Sender:</strong>
+      <%= request.sender_id %>
+    </p>
+    <%= form.hidden_field :sender_id %>
   </div>
 
   <div>
