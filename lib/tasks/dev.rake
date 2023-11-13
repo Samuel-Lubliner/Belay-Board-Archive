@@ -35,7 +35,36 @@ if Rails.env.development?
 
     task add_availabilities: :environment do
       puts "adding availabilities..."
+    
+      locations = ["Movement Lincoln Park", "Movement Wrigley", "BKB", "First Ascent Avondale", "First Ascent Humboldt", "First Ascent Uptown"]
+
+      descriptions = ['Seeking a partner for bouldering.', 'Seeking a partner for top rope.', 'Seeking a partner lead climbing.']
+    
+      users = User.all
+    
+      users.each do |user|
+        20.times do
+          start_time = rand(3.months).seconds.from_now
+    
+          end_time = start_time + rand(2..6).hours
+    
+          location = locations.sample
+
+          description = descriptions.sample
+    
+          user.availabilities.create(
+            start_time: start_time,
+            end_time: end_time,
+            location: location,
+            description: description,
+            is_open: true
+          )
+        end
+      end
+    
+      puts "done adding availabilities..."
     end
+    
 
     task add_requests: :environment do
       puts "adding requests..."
