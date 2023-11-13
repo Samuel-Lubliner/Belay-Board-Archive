@@ -6,7 +6,7 @@
   <% @availabilities.each do |availability| %>
     <%= render availability %>
     <p>
-      <%= link_to "Show this availability", availability %>
+      <%= link_to "Request this availability", new_request_path(availability_id: availability.id) %>
     </p>
   <% end %>
 </div>

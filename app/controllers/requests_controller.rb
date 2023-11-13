@@ -12,7 +12,8 @@ class RequestsController < ApplicationController
 
   # GET /requests/new
   def new
-    @request = Request.new
+    @availability = Availability.find(params[:availability_id]) if params[:availability_id]
+    @request = Request.new(availability: @availability)
   end
 
   # GET /requests/1/edit
