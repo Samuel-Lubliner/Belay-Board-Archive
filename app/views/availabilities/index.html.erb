@@ -2,6 +2,25 @@
 
 <h1>Availabilities</h1>
 
+<%= month_calendar events: @availabilities do |date, availabilities| %>
+  <div>
+    <%= date.strftime("%B %d, %Y") %>
+    <% availabilities.each do |availability| %>
+      <div>
+        <%= render partial: "availability", locals: { availability: availability } %>
+        <%= link_to "Request this availability", new_request_path(availability_id: availability.id) %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<%= link_to "New availability", new_availability_path %>
+
+
+<p style="color: green"><%= notice %></p>
+
+<h1>Availabilities</h1>
+
 <div id="availabilities">
   <% @availabilities.each do |availability| %>
     <%= render availability %>
