@@ -1,33 +1,28 @@
 <p style="color: green"><%= notice %></p>
-
-<h1>Availabilities</h1>
-
-<%= month_calendar events: @availabilities do |date, availabilities| %>
-  <div>
-    <%= date.strftime("%B %d, %Y") %>
-    <% availabilities.each do |availability| %>
-      <div>
-        <%= render partial: "availability", locals: { availability: availability } %>
-        <%= link_to "Request this availability", new_request_path(availability_id: availability.id) %>
+<div class="container, text-center" style="padding-left: 20px; padding-right: 20px;">
+  <h1>Climb Times</h1>
+  <div><%= link_to "New availability", new_availability_path, class: "btn btn-primary btn-sm" %></div>
+  <%= month_calendar events: @availabilities do |date, availabilities| %>
+    <div class="card mb-3">
+      <div class="card-header">
+        <%= date.strftime("%m/%d/%Y") %>
       </div>
-    <% end %>
-  </div>
-<% end %>
-
-<%= link_to "New availability", new_availability_path %>
-
-
-<p style="color: green"><%= notice %></p>
-
-<h1>Availabilities</h1>
-
-<div id="availabilities">
-  <% @availabilities.each do |availability| %>
-    <%= render availability %>
-    <p>
-      <%= link_to "Request this availability", new_request_path(availability_id: availability.id) %>
-    </p>
+      <div class="card-body p-0">
+        <% if availabilities.any? %>
+          <% availabilities.each do |availability| %>
+            <div class="border-bottom">
+              <div class="p-2">
+                <%= render availability %>
+                <%= link_to "Climb with #{availability.user.username}", new_request_path(availability_id: availability.id), class: "btn btn-primary btn-sm d-block mt-2" %>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="p-2">
+            <%= link_to "New availability", new_availability_path, class: "btn btn-primary btn-sm d-block mt-2" %>
+          </p>
+        <% end %>
+      </div>
+    </div>
   <% end %>
 </div>
-
-<%= link_to "New availability", new_availability_path %>
