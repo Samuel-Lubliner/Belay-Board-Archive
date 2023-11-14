@@ -3,7 +3,7 @@ class AvailabilitiesController < ApplicationController
 
   # GET /availabilities or /availabilities.json
   def index
-    @availabilities = Availability.all
+    @availabilities = Availability.order(:start_time)
   end
 
   # GET /availabilities/1 or /availabilities/1.json
