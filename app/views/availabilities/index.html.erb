@@ -23,7 +23,7 @@
           <% end %>
         <% else %>
           <p class="p-2">
-            <%= link_to "New availability", new_availability_path, class: "btn btn-primary btn-sm d-block mt-2" %>
+            <%= link_to "New availability", new_availability_path(date: date.to_date), class: "btn btn-primary btn-sm d-block mt-2" %>
           </p>
         <% end %>
       </div>
