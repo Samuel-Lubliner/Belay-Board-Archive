@@ -4,13 +4,21 @@ class RequestsController < ApplicationController
   def accept
     @request = Request.find(params[:id])
     @request.accepted!
-    redirect_to availability_requests_path(@request.availability), notice: 'Request accepted.'
+  
+    respond_to do |format|
+      format.html { redirect_to availability_requests_path(@request.availability), notice: 'Request accepted.' }
+      format.js   # This will look for a file named `accept.js.erb` in `app/views/requests/`
+    end
   end
 
   def reject
     @request = Request.find(params[:id])
     @request.rejected!
-    redirect_to availability_requests_path(@request.availability), notice: 'Request rejected.'
+  
+    respond_to do |format|
+      format.html { redirect_to availability_requests_path(@request.availability), notice: 'Request rejected.' }
+      format.js
+    end
   end
 
   # GET /requests or /requests.json
